@@ -7,6 +7,16 @@ class ListHelper {
 		lowest
 	}
 	
+	def newLowest(n: List[Int]): Int = {
+		def _lowest(ul: List[Int], lwt: Int): Int = ul match {
+			case Nil => lwt
+			case x :: ys if(x < lwt) => _lowest(ys, x)
+			case x :: ys if(x == lwt) => _lowest(ys, x)
+			case x :: ys if(x > lwt) => _lowest(ys, lwt)
+		}
+		_lowest(n, Integer.MAX_VALUE)
+	}
+	
 	def createRandomNumberList(numOfRanNums: Int, numCeiling: Int): List[Int] = {
 		val r = scala.util.Random
 		val array = new Array[Int](numOfRanNums)
@@ -26,6 +36,15 @@ class ListHelper {
 		case Nil => Nil
 		case x :: ys if(x == findLowest(li)) => x :: sort(ys)
 		case x :: ys if(x > findLowest(li)) => sort(ys :+ x)
+	}
+	
+	def newSort(li: List[Int]): List[Int] = {
+		def _sort(ul: List[Int], sl: List[Int]): List[Int] = ul match {
+			case Nil => sl
+			case x :: ys if(x == findLowest(ul)) => _sort(ys, sl :+ x)
+			case x :: ys if(x > findLowest(ul)) => _sort(ys :+ x, sl)
+		}
+		_sort(li, List())
 	}
 	
 }
