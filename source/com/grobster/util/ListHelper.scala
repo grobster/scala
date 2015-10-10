@@ -1,5 +1,7 @@
 package com.grobster.util
 
+import scala.annotation.tailrec
+
 class ListHelper {
 	def findLowest(n: List[Int]): Int = {
 		var lowest = Integer.MAX_VALUE
@@ -8,6 +10,7 @@ class ListHelper {
 	}
 	
 	def newLowest(n: List[Int]): Int = {
+		@tailrec
 		def _lowest(ul: List[Int], lwt: Int): Int = ul match {
 			case Nil => lwt
 			case x :: ys if(x < lwt) => _lowest(ys, x)
@@ -39,10 +42,11 @@ class ListHelper {
 	}
 	
 	def newSort(li: List[Int]): List[Int] = {
+		@tailrec
 		def _sort(ul: List[Int], sl: List[Int]): List[Int] = ul match {
 			case Nil => sl
-			case x :: ys if(x == findLowest(ul)) => _sort(ys, sl :+ x)
-			case x :: ys if(x > findLowest(ul)) => _sort(ys :+ x, sl)
+			case x :: ys if(x == newLowest(ul)) => _sort(ys, sl :+ x)
+			case x :: ys if(x > newLowest(ul)) => _sort(ys :+ x, sl)
 		}
 		_sort(li, List())
 	}
