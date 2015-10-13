@@ -51,4 +51,9 @@ class ListHelper {
 		_sort(li, List())
 	}
 	
+	def reverse[A](li: List[A]): List[A] = li match {
+		case Nil => Nil
+		case x :: ys => reverse(ys) :+ x
+	}
+	
 }
