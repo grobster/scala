@@ -1,6 +1,7 @@
 package com.grobster.work
 
 import java.nio.file._
+import scala.annotation.tailrec
 	
 	class Renamer(val p: Path) {
 		val fileEndings = List(".jpg", ".jpeg", ".png", ".bmp")
@@ -14,4 +15,18 @@ import java.nio.file._
 		}
 		
 		def newPath(p: Path): Renamer = new Renamer(p)
+		
+		
+		
+		
+		def findGid2(ls: List[String]): String = {
+			@tailrec
+			def _find(ls: List[String]): String = ls match {
+				case Nil => "nothing"
+				case x :: ys if(isValidGid(x)) => x
+				case x :: ys if(isValidGid(x)) => _find(ys)
+				case _ => "not found"
+			}
+			_find(ls)
+		}
 	}
