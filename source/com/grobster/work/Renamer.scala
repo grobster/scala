@@ -24,7 +24,7 @@ import scala.annotation.tailrec
 			def _find(ls: List[String]): String = ls match {
 				case Nil => "nothing"
 				case x :: ys if(isValidGid(x)) => x
-				case x :: ys if(isValidGid(x)) => _find(ys)
+				case x :: ys if(!isValidGid(x)) => _find(ys)
 				case _ => "not found"
 			}
 			_find(ls)
