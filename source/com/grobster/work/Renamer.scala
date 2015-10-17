@@ -6,7 +6,7 @@ import scala.annotation.tailrec
 	class Renamer(val p: Path) {
 		val fileEndings = List(".jpg", ".jpeg", ".png", ".bmp")
 		
-		def isValidGid(s: String): Boolean = { s.length == 8 && s(0) == 'Z' }
+		def isValidGid(s: String): Boolean = { s.length == 8 && s(0) == 'Z' && s(1) == '0' }
 		
 		def findGid(sl: List[String]): String = sl match {
 			case Nil => ""
