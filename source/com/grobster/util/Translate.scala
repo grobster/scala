@@ -1,10 +1,8 @@
 package com.grobster.util
 
 class Translate {
-	val translatorBasePath = "https://translate.google.com"
 	val poundSymbol = "#"
 	val separator = "/"
-	val htmlSpace = "%20"
 
 	val languageCodes = Map("English" -> "en", "Armenian" -> "hy", "Bulgarian" -> "bg", "Chinese" -> "zh", "Czech" -> "cs", "Dutch" -> "nl", "French" -> "fr", "German" -> "de", "Italian" -> "it", "Korean" -> "ko", "Portuguese" -> "pt", "Russian" -> "ru", "Spanish" -> "es", "Japanese" -> "ja")
 	 
@@ -13,9 +11,10 @@ class Translate {
 		s.trim.replace(" ", htmlSpace)
 	}
 	
-	def completePath(basePath: String, fromLanguage: String, toLanguage: String, text: String): String = {
+	def completePath(fromLanguage: String, toLanguage: String, text: String): String = {
+		val translatorBasePath = "https://translate.google.com"
 		val replacedText = replaceSpaceWithHtmlSpace(text)
-		val completedPath: String = basePath + separator + poundSymbol + languageCodes(fromLanguage) + separator + languageCodes(toLanguage) + separator + replacedText
+		val completedPath: String = translatorBasePath + separator + poundSymbol + languageCodes(fromLanguage) + separator + languageCodes(toLanguage) + separator + replacedText
 		completedPath
 	}
 }
