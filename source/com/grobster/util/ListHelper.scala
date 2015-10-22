@@ -56,4 +56,14 @@ class ListHelper {
 		case x :: ys => reverse(ys) :+ x
 	}
 	
+	def insert[A](li: List[A], v: A, pos: Int): List[A] = {
+		@tailrec
+		def _insert(li: List[A], nl: List[A], v: A, pos: Int): List[A] = li match {
+			case Nil => Nil
+			case x :: ys if(li.indexOf(x) < pos) => _insert(ys, nl :+ x, v, pos - 1)
+			case x :: ys if(li.indexOf(x) == pos) => nl ::: List(v) ::: List(x) ::: ys
+		}
+		_insert(li, List.empty, v, pos)
+	}
+	
 }
