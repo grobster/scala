@@ -33,6 +33,16 @@ class ListHelper {
 		array.toList
 	}
 	
+	def createRandomIntList(n: Int, ceiling: Int): List[Int] = {
+		val r = scala.util.Random
+		@tailrec
+		def _create(n: Int, nl: List[Int], ceiling: Int): List[Int] = n match {
+			case 0 => nl
+			case x if(x > 0) => _create(x - 1, nl :+ r.nextInt(ceiling), ceiling)
+		}
+		_create(n, List.empty, ceiling)
+	}
+	
 	
 	
 	def sort(li: List[Int]): List[Int] = li match {
