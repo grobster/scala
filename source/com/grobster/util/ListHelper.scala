@@ -3,12 +3,7 @@ package com.grobster.util
 import scala.annotation.tailrec
 
 class ListHelper {
-	def findLowest(n: List[Int]): Int = {
-		var lowest = Integer.MAX_VALUE
-		for(x <- n) { if(x < lowest) lowest = x }
-		lowest
-	}
-	
+
 	def newLowest(n: List[Int]): Int = {
 		@tailrec
 		def _lowest(ul: List[Int], lwt: Int): Int = ul match {
@@ -20,19 +15,6 @@ class ListHelper {
 		_lowest(n, Integer.MAX_VALUE)
 	}
 	
-	def createRandomNumberList(numOfRanNums: Int, numCeiling: Int): List[Int] = {
-		val r = scala.util.Random
-		val array = new Array[Int](numOfRanNums)
-		var nvar = numOfRanNums
- 
-		while(nvar > 0) {
-			val num = r.nextInt(numCeiling)
-			array(nvar - 1) = num
-			nvar -= 1
-		}
-		array.toList
-	}
-	
 	def createRandomIntList(n: Int, ceiling: Int): List[Int] = {
 		val r = scala.util.Random
 		@tailrec
@@ -41,14 +23,6 @@ class ListHelper {
 			case x if(x > 0) => _create(x - 1, nl :+ r.nextInt(ceiling), ceiling)
 		}
 		_create(n, List.empty, ceiling)
-	}
-	
-	
-	
-	def sort(li: List[Int]): List[Int] = li match {
-		case Nil => Nil
-		case x :: ys if(x == findLowest(li)) => x :: sort(ys)
-		case x :: ys if(x > findLowest(li)) => sort(ys :+ x)
 	}
 	
 	def newSort(li: List[Int]): List[Int] = {
@@ -74,6 +48,5 @@ class ListHelper {
 			case x :: ys if(li.indexOf(x) == pos) => nl ::: List(v) ::: List(x) ::: ys
 		}
 		_insert(li, List.empty, v, pos)
-	}
-	
+	}	
 }
