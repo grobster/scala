@@ -4,7 +4,7 @@ import scala.annotation.tailrec
 
 class ListHelper {
 
-	def newLowest(n: List[Int]): Int = {
+	def findLowest(n: List[Int]): Int = {
 		@tailrec
 		def _lowest(ul: List[Int], lwt: Int): Int = ul match {
 			case Nil => lwt
@@ -25,17 +25,17 @@ class ListHelper {
 		_create(n, List.empty, ceiling)
 	}
 	
-	def newSort(li: List[Int]): List[Int] = {
+	def sort(li: List[Int]): List[Int] = {
 		@tailrec
 		def _sort(ul: List[Int], sl: List[Int]): List[Int] = ul match {
 			case Nil => sl
-			case x :: ys if(x == newLowest(ul)) => _sort(ys, sl :+ x)
-			case x :: ys if(x > newLowest(ul)) => _sort(ys :+ x, sl)
+			case x :: ys if(x == findLowest(ul)) => _sort(ys, sl :+ x)
+			case x :: ys if(x > findLowest(ul)) => _sort(ys :+ x, sl)
 		}
 		_sort(li, List())
 	}
 	
-	def newReverse[A](li: List[A]): List[A] = {
+	def reverse[A](li: List[A]): List[A] = {
 		@tailrec
 		def _rev(li: List[A], nl: List[A]): List[A] = li match {
 			case Nil => nl
