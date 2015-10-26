@@ -35,9 +35,13 @@ class ListHelper {
 		_sort(li, List())
 	}
 	
-	def reverse[A](li: List[A]): List[A] = li match {
-		case Nil => Nil
-		case x :: ys => reverse(ys) :+ x
+	def newReverse[A](li: List[A]): List[A] = {
+		@tailrec
+		def _rev(li: List[A], nl: List[A]): List[A] = li match {
+			case Nil => nl
+			case x :: ys => _rev(ys, x :: nl)
+		}
+		_rev(li, List.empty)
 	}
 	
 	def insert[A](li: List[A], v: A, pos: Int): List[A] = {
