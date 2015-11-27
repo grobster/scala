@@ -52,5 +52,15 @@ class ListHelper {
 			case x :: ys if(li.indexOf(x) == pos) => nl ::: List(v) ::: List(x) ::: ys
 		}
 		_insert(li, List.empty, v, pos)
-	}	
+	}
+
+	def drop[A](li: List[A], n: Int): List[A] = {
+		@tailrec
+		def _drop[A](li: List[A], nl: List[A], n: Int): List[A] = li match {
+			case Nil => nl
+			case head :: tail if(li.indexOf(head) < n) => _drop(tail, nl, n - 1)
+			case head :: tail => _drop(tail, nl :+ head, n - 1)
+		}
+		_drop(li, List.empty, n)
+     }	
 }
